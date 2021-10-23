@@ -1,0 +1,22 @@
+name: LastLife
+version: ${version}
+main: com.codelog.lastlife.LastLife
+api-version: 1.17
+author: CodeLog
+commands:
+  lastlife:
+    description: LastLife main command
+    usage: /lastlife <operation> [arguments]
+    permission: lastlife.admin
+  lives:
+    description: See how many lives you have left
+    usage: /lives
+    permission: lastlife.lives
+  setlives:
+    description: Modify a player's remaining lives
+    usage: /setlives <player> <lives>
+    permission: lastlife.admin
+  givelife:
+    description: Donate one life to another player
+    usage: /givelife <player>
+    permission: lastlife.givelife

@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+}
+
+group 'com.codelog'
+version '0.0.2'
+
+repositories {
+    mavenCentral()
+    maven {
+        url = uri("https://papermc.io/repo/repository/maven-public/")
+    }
+}
+
+dependencies {
+    compileOnly("io.papermc.paper:paper-api:1.17.1-R0.1-SNAPSHOT")
+}
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(16))
+}
+
+task generateJava(type: Copy) {
+    def templateContext = [version: project.version]
+    inputs.properties(templateContext)
+    from 'src/template/java' into "$buildDir/generated/java" expand templateContext
+    from 'src/template/resources' into "$buildDir/generated/resources" expand templateContext
+}
+
+sourceSets.main.java.srcDir "$buildDir/generated/java"
+sourceSets.main.resources.srcDir "$buildDir/generated/resources"
+compileJava.dependsOn generateJava
+
